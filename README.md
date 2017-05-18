@@ -17,3 +17,11 @@ Also, you must have a Google Cloud API Key environment variable
 # In your shell or shell rc
 export GOOGLE_CLOUD_API_KEY=<your key>
 ```
+
+## Usage
+
+Currently, vim-transit only supports command mode translation
+```
+:TransIt I love you
+>>> 사랑해
+```
