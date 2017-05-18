@@ -13,9 +13,10 @@ endif
 let g:transit_src = get(g:, 'transit_src', 'en')
 let g:transit_dst = get(g:, 'transit_dst', 'kr')
 
-function! s:translate()
+function! s:translate(text)
   echo "Hello World!"
   echo "transit_src:".g:transit_src
+  echo "Given text is [".a:text."]"
 endfunction
 
-command! TransIt call <SID>translate()
+command! TransIt call <SID>translate('constant')
