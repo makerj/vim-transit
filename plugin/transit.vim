@@ -11,22 +11,36 @@ if !has( 'python' ) && !has( 'python3' )
 endif
 
 let g:transit_src = get(g:, 'transit_src', 'en')
-let g:transit_dst = get(g:, 'transit_dst', 'kr')
+let g:transit_dst = get(g:, 'transit_dst', 'ko')
 
 function! s:translate(...)
   let s:query = join(a:000, "")
   if empty(s:query)
     echo "vim-transit: empty query were given. ignore..."
   else
-    echo "transit_src:".g:transit_src
-    echo "Given text is [".s:query."]"
+    "echo "transit_src:".g:transit_src
+    "echo "Given text is [".s:query."]"
 python << EOF
 import vim
 import requests
-print "Vim argument is: [%s]" % vim.eval("s:query")
-print "python: return web page contents to vim as a variable"
-content = requests.get('http://api.ipify.org?format=json').content.replace("'", "''") # escape single quote
-vim.command("let web_content = '%s'" % content)
+import json
+import os
+
+api_key = os.environ.get('GOOGLE_CLOUD_API_KEY', None)
+if api_key:
+  vim.command("let web_content = ''")
+  api_url = 'https://translation.googleapis.com/language/translate/v2?key=%s' % api_key
+  api_data = {
+    'q': vim.eval("s:query"),
+    'source': vim.eval('g:transit_src'),
+    'target': vim.eval('g:transit_dst'),
+    'format': 'text',
+  }
+  content = requests.post(api_url, data=api_data).content.replace("'", "''") # escape single quote
+  translated = json.loads(content)['data']['translations'][0]['translatedText']
+  vim.command("let web_content = '%s'" % translated)
+else:
+  vim.command("let web_content = 'vim-transit: (ERROR) Environment variable GOOGLE_CLOUD_API_KEY is not set'")
 EOF
   echo web_content
 
