@@ -27,8 +27,14 @@ export GOOGLE_CLOUD_API_KEY=<your key>
 
 ## Usage
 
-Currently, vim-transit only supports command mode translation
+Print translated text to status line
+
 ```
 :TransIt I love you
->>> 사랑해
 ```
+
+Put translated text to current buffer
+```
+:TransItPut I love you
+```
+
