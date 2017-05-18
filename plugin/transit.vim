@@ -25,7 +25,8 @@ import vim
 import requests
 print "Vim argument is: [%s]" % vim.eval("s:query")
 print "python: return web page contents to vim as a variable"
-vim.command("let web_content = '%s'" % requests.get('http://api.ipify.org?format=json').content)
+content = requests.get('http://api.ipify.org?format=json').content.replace("'", "''") # escape single quote
+vim.command("let web_content = '%s'" % content)
 EOF
   echo web_content
 
