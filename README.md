@@ -2,6 +2,11 @@
 
 This plugin translates a given text from source language to target language via Google Translate API.
 
+## Prerequisite
+
+* vim with python support
+* python [requests](http://docs.python-requests.org/en/master/)
+
 ## Variables
 
 You can configure this plugin using following variables
