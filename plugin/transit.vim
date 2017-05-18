@@ -10,8 +10,12 @@ if !has( 'python' ) && !has( 'python3' )
   finish
 endif
 
+let g:transit_src = get(g:, 'transit_src', 'en')
+let g:transit_dst = get(g:, 'transit_dst', 'kr')
+
 function! s:translate()
   echo "Hello World!"
+  echo "transit_src:".g:transit_src
 endfunction
 
 command! TransIt call <SID>translate()
