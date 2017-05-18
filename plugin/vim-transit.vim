@@ -56,7 +56,42 @@ function! s:TransItPut(...)
   :put =s:translated
 endfunction
 
+function! s:TransItBlock() abort
+  let start_v = col("'<") - 1
+  let end_v = col("'>")
+  let lines = getline("'<","'>")
+
+  if len(lines) > 1
+    let lines[0] = strpart(lines[0],start_v)
+    let lines[-1] = strpart(lines[-1],0,end_v)
+    let str = join(lines)
+  else
+    let str = strpart(lines[0],start_v,end_v-start_v)
+  endif
+
+  call s:translate(str)
+  echo s:translated
+endfunction
+
+function! s:TransItBlockPut() abort
+  let start_v = col("'<") - 1
+  let end_v = col("'>")
+  let lines = getline("'<","'>")
+
+  if len(lines) > 1
+    let lines[0] = strpart(lines[0],start_v)
+    let lines[-1] = strpart(lines[-1],0,end_v)
+    let str = join(lines)
+  else
+    let str = strpart(lines[0],start_v,end_v-start_v)
+  endif
+
+  call s:translate(str)
+  :put =s:translated
+endfunction
 
 command! -nargs=* TransIt call <SID>TransIt('<args>')
 command! -nargs=* TransItPut call <SID>TransItPut('<args>')
+command! -range TransItBlock call <SID>TransItBlock()
+command! -range TransItBlockPut call <SID>TransItBlockPut()
 

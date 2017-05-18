@@ -27,6 +27,8 @@ export GOOGLE_CLOUD_API_KEY=<your key>
 
 ## Usage
 
+### Command Mode
+
 Print translated text to status line
 
 ```
@@ -36,5 +38,18 @@ Print translated text to status line
 Put translated text to current buffer
 ```
 :TransItPut I love you
+```
+
+### Visual Mode
+
+Print translated text to status line
+
+```
+:'<,'>TransItBlock
+```
+
+Put translated text to current buffer
+```
+:'<,'>TransItBlockPut
 ```
 
