@@ -22,12 +22,12 @@ function! s:translate(...)
     echo "Given text is [".s:query."]"
 python << EOF
 import vim
+import requests
 print "Vim argument is: [%s]" % vim.eval("s:query")
-print "python: return string 'pypypy' to vim as variable"
-s = 'pypypy'
-vim.command("let pyreturn = '%s'" % s)
+print "python: return web page contents to vim as a variable"
+vim.command("let web_content = '%s'" % requests.get('http://api.ipify.org?format=json').content)
 EOF
-  echo pyreturn
+  echo web_content
 
   endif
 endfunction
