@@ -1,5 +1,7 @@
 # vim-transit
 
+![demo](demo.gif)
+
 This plugin translates a given text from source language to target language via Google Translate API.
 
 ## Prerequisite
