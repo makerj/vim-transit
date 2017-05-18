@@ -18,9 +18,17 @@ function! s:translate(...)
   if empty(s:query)
     echo "vim-transit: empty query were given. ignore..."
   else
-    echo "Hello World!"
     echo "transit_src:".g:transit_src
     echo "Given text is [".s:query."]"
+python << EOF
+import vim
+print "Vim argument is: [%s]" % vim.eval("s:query")
+print "python: return string 'pypypy' to vim as variable"
+s = 'pypypy'
+vim.command("let pyreturn = '%s'" % s)
+EOF
+  echo pyreturn
+
   endif
 endfunction
 
