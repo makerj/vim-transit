@@ -65,7 +65,7 @@ function! s:TransItBlock() abort
   if len(lines) > 1
     let lines[0] = strpart(lines[0],start_v)
     let lines[-1] = strpart(lines[-1],0,end_v)
-    let str = join(lines)
+    let str = join(lines, "\n")
   else
     let str = strpart(lines[0],start_v,end_v-start_v)
   endif
@@ -80,9 +80,9 @@ function! s:TransItBlockPut() abort
   let lines = getline("'<","'>")
 
   if len(lines) > 1
-      let lines[0] = strpart(lines[0],start_v)
+    let lines[0] = strpart(lines[0],start_v)
     let lines[-1] = strpart(lines[-1],0,end_v)
-    let str = join(lines)
+    let str = join(lines, "\n")
   else
     let str = strpart(lines[0],start_v,end_v-start_v)
   endif
