@@ -23,7 +23,7 @@ function! s:translate(query)
     "echo "Given text is [".a:query."]"
 python << EOF
 import vim
-import requests
+import urllib2
 import json
 import os
 
@@ -31,13 +31,14 @@ api_key = os.environ.get('GOOGLE_CLOUD_API_KEY', None)
 if api_key:
   vim.command("let web_content = ''")
   api_url = 'https://translation.googleapis.com/language/translate/v2?key=%s' % api_key
-  api_data = {
+  api_data = json.dumps({
     'q': vim.eval("a:query"),
     'source': vim.eval('g:transit_src'),
     'target': vim.eval('g:transit_dst'),
     'format': 'text',
-  }
-  content = requests.post(api_url, data=api_data).content.replace("'", "''") # escape single quote
+  })
+  req = urllib2.Request(api_url, api_data, {'Content-Type': 'application/json'})
+  content = urllib2.urlopen(req).read().replace("'", "''") # escape single quote
   translated = json.loads(content)['data']['translations'][0]['translatedText']
   vim.command("let s:translated = '%s'" % translated)
 else:

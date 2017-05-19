@@ -2,12 +2,28 @@
 
 ![demo](demo.gif)
 
-This plugin translates a given text from source language to target language via Google Translate API.
+**vim-transit** translates a given text from source language to target language via Google Translate API.
 
 ## Prerequisite
 
 * vim with python support
-* python [requests](http://docs.python-requests.org/en/master/)
+
+## Installation
+
+it's recommended that you use a plugin manager like [vim-plug](https://github.com/junegunn/vim-plug)
+
+### vim-plug
+
+```
+Plug 'makerj/vim-transit'
+```
+
+### Vundle
+
+```
+Plugin 'makerj/vim-transit'
+```
+
 
 ## Variables
 
