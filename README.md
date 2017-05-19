@@ -43,7 +43,7 @@ export GOOGLE_CLOUD_API_KEY=<your key>
 
 ## Usage
 
-### Command Mode
+### Normal Mode
 
 Print translated text to status line
 
