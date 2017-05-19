@@ -40,6 +40,11 @@ Put translated text to current buffer
 :TransItPut I love you
 ```
 
+Swap source and target language
+```
+:TransitSwapLang
+```
+
 ### Visual Mode
 
 Print translated text to status line

@@ -79,7 +79,7 @@ function! s:TransItBlockPut() abort
   let lines = getline("'<","'>")
 
   if len(lines) > 1
-    let lines[0] = strpart(lines[0],start_v)
+      let lines[0] = strpart(lines[0],start_v)
     let lines[-1] = strpart(lines[-1],0,end_v)
     let str = join(lines)
   else
@@ -90,6 +90,16 @@ function! s:TransItBlockPut() abort
   :put =s:translated
 endfunction
 
+function! s:TransItSwapLang()
+  let tmp = g:transit_src
+  let g:transit_src = g:transit_dst
+  let g:transit_dst = tmp
+  echo 'transit: current langpair >>'
+        \.' src['.g:transit_src.']'
+        \.' dst['.g:transit_dst.']'
+endfunction
+
+command! TransItSwapLang call <SID>TransItSwapLang()
 command! -nargs=* TransIt call <SID>TransIt('<args>')
 command! -nargs=* TransItPut call <SID>TransItPut('<args>')
 command! -range TransItBlock call <SID>TransItBlock()
